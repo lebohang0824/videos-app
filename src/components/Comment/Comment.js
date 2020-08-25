@@ -23,7 +23,7 @@ const Comment = () => {
         e.preventDefault();
 
         if (name.trim().length < 1) {
-            errorAlert('Full names required!');
+            errorAlert('Full name required!');
             return;
         }
 
