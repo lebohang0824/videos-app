@@ -18,26 +18,24 @@ const Comment = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
+
         if (name.trim().length < 1) {
-            setResponseType('error');
-            setResponse('Full names required!');
+            errorAlert('Full names required!');
             return;
         }
 
+        // Email Validation
         if (email.trim().length < 1 || !email.match(/\S+@\S+\.\S+/)) {
-            setResponseType('error');
-            setResponse('Enter valid email address!');
+            errorAlert('Enter valid email address!');
             return;
         }
 
         if (comment.trim().length < 1) {
-            setResponseType('error');
-            setResponse('Comment message required!');
+            errorAlert('Comment message required!');
             return;
         }
 
-        setResponseType('success');
-        setResponse('Thank you for your feedback!');
+        successAlert('Thank you for your feedback!');
         
     }
 
@@ -54,6 +52,17 @@ const Comment = () => {
     // Set Comment on keyup
     const onSetComment = ({ target }) => {
         setComment(target.value);
+    }
+
+    // Error message
+    const errorAlert = (message) => {
+        setResponseType('error');
+        setResponse(message);
+    }
+
+    const successAlert = (message) => {
+        setResponseType('success');
+        setResponse(message);
     }
     
     return (
