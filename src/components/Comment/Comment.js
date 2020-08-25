@@ -5,19 +5,22 @@ import {
     Button,
     TextField
 } from '@material-ui/core'
+import axios from 'axios'
 
 const Comment = () => {
 
+    // Inputs
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [comment, setComment] = useState('');
+
     // Response
     const [response, setResponse] = useState('');
     const [responseType, setResponseType] = useState('');
 
     const onSubmit = (e) => {
+        
         e.preventDefault();
-
 
         if (name.trim().length < 1) {
             errorAlert('Full names required!');
@@ -35,7 +38,30 @@ const Comment = () => {
             return;
         }
 
-        successAlert('Thank you for your feedback!');
+        // Inputs Data
+        const inputData = {
+            name: name, 
+            email: email, 
+            comment: comment
+        };
+
+        // Make a request
+        axios.post('/api/comment', inputData)
+            .then(({ data }) => {
+
+                if(data.success) {
+                    // Clear inputs
+                    setName('');
+                    setEmail('');
+                    setComment('');
+
+                    successAlert('Thank you for your comment');
+                } else {
+                    errorAlert('Something went wrong!');
+                }
+
+            })
+            .catch(error => console.log(error))
         
     }
 
