@@ -1,13 +1,19 @@
-import React, {useState} from 'react'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React, { useState } from 'react'
 import Styles from './Comment.module.scss'
+import { Alert } from '@material-ui/lab'
+import {
+    Button,
+    TextField
+} from '@material-ui/core'
 
 const Comment = () => {
 
     const [name, setName] = useState(null);
     const [email, setEmail] = useState(null);
     const [comment, setComment] = useState(null);
+    // Response
+    const [response, setResponse] = useState(null);
+    const [responseType, setResponseType] = useState(null);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -31,7 +37,13 @@ const Comment = () => {
     }
     
     return (
-        <form onSubmit={onSubmit} autoComplete="off">
+        <form onSubmit={onSubmit} autoComplete="off" className={Styles.form}>
+
+            {response && responseType && (
+                <Alert severity={responseType}>
+                    {response}
+                </Alert>
+            )}
 
             <TextField
                 id="name"
