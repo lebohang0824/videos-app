@@ -11,10 +11,23 @@ const Comment = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        
+        console.log(name, email, comment);
+    }
 
-        const [name, email] = e.target;
+    // Set Name on keyup
+    const onSetName = ({ target }) => {
+        setName(target.value);
+    }
+    
+    // Set Email on keyup
+    const onSetEmail = ({ target }) => {
+        setEmail(target.value);
+    }
 
-        console.log(name.value, message.value);
+    // Set Comment on keyup
+    const onSetComment = ({ target }) => {
+        setComment(target.value);
     }
     
     return (
@@ -23,27 +36,27 @@ const Comment = () => {
             <TextField
                 id="name"
                 fullWidth
+                margin="normal"
                 label="Full Name"
                 placeholder="Full Name"
-                helperText="Enter your name and surname"
-                margin="normal"
                 InputLabelProps={{
                     shrink: true,
                 }}
                 variant="outlined"
+                onKeyUp={onSetName}
             />
 
             <TextField
                 id="email"
                 fullWidth
                 label="Email"
-                placeholder="Email"
-                helperText="Enter your surname"
                 margin="normal"
+                placeholder="Email"
                 InputLabelProps={{
                     shrink: true,
                 }}
                 variant="outlined"
+                onKeyUp={onSetEmail}
             />
 
             <TextField
@@ -52,16 +65,17 @@ const Comment = () => {
                 multiline
                 id="message"
                 label="Message"
-                placeholder="Message"
-                helperText="Message"
                 margin="normal"
+                placeholder="Message"
                 InputLabelProps={{
                     shrink: true,
                 }}
                 variant="outlined"
+                onKeyUp={onSetComment}
             />
         
             <Button
+                fullWidth
                 type="submit"
                 color="primary"
                 variant="contained">
