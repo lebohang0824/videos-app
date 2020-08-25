@@ -8,17 +8,37 @@ import {
 
 const Comment = () => {
 
-    const [name, setName] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [comment, setComment] = useState(null);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [comment, setComment] = useState('');
     // Response
-    const [response, setResponse] = useState(null);
-    const [responseType, setResponseType] = useState(null);
+    const [response, setResponse] = useState('');
+    const [responseType, setResponseType] = useState('');
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        if (name.trim().length < 1) {
+            setResponseType('error');
+            setResponse('Full names required!');
+            return;
+        }
+
+        if (email.trim().length < 1 || !email.match(/\S+@\S+\.\S+/)) {
+            setResponseType('error');
+            setResponse('Enter valid email address!');
+            return;
+        }
+
+        if (comment.trim().length < 1) {
+            setResponseType('error');
+            setResponse('Comment message required!');
+            return;
+        }
+
+        setResponseType('success');
+        setResponse('Thank you for your feedback!');
         
-        console.log(name, email, comment);
     }
 
     // Set Name on keyup
