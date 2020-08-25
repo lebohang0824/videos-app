@@ -1,10 +1,11 @@
 import Layout from '../components/Layout'
+import Comment from '../components/Comment'
 
 const Home = () => {
     
     return (
         <Layout>
-            <h1>Help</h1>
+            <Comment />
         </Layout>
     );
 
